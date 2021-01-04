@@ -1,1 +1,21 @@
 
+<h2><%=@post.title%></h2>
+<h2><%=@post.content%></h2>
+<br>
+<%if @post.categories%>
+  <%@post.categories.each do |category|%>
+    <%=category.name%>
+  <%end%>
+<%end%>
+<br>
+<%if @post.comments%>
+<% unique_users = []%>
+  <%@post.comments.each do |comment|%>
+    <%=comment.content%>
+    <%unique_users << comment.user%>
+  <%end%>
+  <% unique_users.uniq.each do |user|%>
+    <%=link_to user.username, user_path(user)%>
+  <%end%>
+
+<%end%>
